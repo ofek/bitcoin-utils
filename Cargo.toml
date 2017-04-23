@@ -1,0 +1,6 @@
+[package]
+name = "bitcoin-utils"
+version = "0.1.0"
+authors = ["Ofek Lev <ofekmeister@gmail.com>"]
+
+[dependencies]
