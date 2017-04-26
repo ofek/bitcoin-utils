@@ -2,5 +2,20 @@
 name = "bitcoin-utils"
 version = "0.1.0"
 authors = ["Ofek Lev <ofekmeister@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/ofek/bitcoin-utils"
+keywords = ["bitcoin", "base58"]
+description = """
+High-performance Bitcoin utility functions
+"""
+
+build = "build.rs"
 
 [dependencies]
+num = "0.1"
+phf = "0.7"
+phf_codegen = "0.7"
+ring = "0.7.5"
+
+[build-dependencies]
+phf_codegen = "0.7"

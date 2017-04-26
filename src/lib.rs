@@ -1,6 +1,4 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-    }
-}
+extern crate phf;
+
+pub mod base58;
+pub mod crypto;
