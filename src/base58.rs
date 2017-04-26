@@ -13,7 +13,7 @@ include!(concat!(env!("OUT_DIR"), "/codegen.rs"));
 
 
 pub fn b58encode(bytes: &[u8]) -> String {
-    let mut encoded = vec!();
+    let mut encoded = Vec::with_capacity(bytes.len() * 256 / 58);
     let mut number = BigUint::from_bytes_be(&bytes);
     let alphabet_length = BigUint::from_u8(58u8).unwrap();
     let zero = BigUint::from_u8(0u8).unwrap();
@@ -39,6 +39,8 @@ pub fn b58encode(bytes: &[u8]) -> String {
 }
 
 
-//pub fn b58encode_check(bytes: &[u8]) -> String {
-//    b58encode(bytes + double_sha256_checksum(bytes))
-//}
+pub fn b58encode_check(bytes: &[u8]) -> String {
+    let mut checked = bytes.to_vec();
+    checked.extend_from_slice(&double_sha256_checksum(bytes));
+    b58encode(&checked)
+}
