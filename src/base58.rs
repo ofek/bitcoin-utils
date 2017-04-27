@@ -77,6 +77,25 @@ pub fn b58decode(string: &String) -> Result<Vec<u8>, Base58DecodeError> {
 }
 
 
+pub fn b58decode_check(string: &String) -> Result<Vec<u8>, Base58DecodeError> {
+    let mut decoded = b58decode(string).unwrap();
+    let length = &decoded.len();
+    let decoded_checksum: Vec<_> = decoded.drain(length - 4 ..).collect();
+    let hash_checksum = double_sha256_checksum(&decoded);
+
+    if &decoded_checksum != &hash_checksum {
+        return Err(
+            Base58DecodeError::IncorrectChecksum {
+                decoded_checksum: decoded_checksum,
+                correct_checksum: hash_checksum
+            }
+        );
+    }
+
+    Ok(decoded)
+}
+
+
 
 
 
