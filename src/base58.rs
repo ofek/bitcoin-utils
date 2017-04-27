@@ -94,18 +94,3 @@ pub fn b58decode_check(string: &String) -> Result<Vec<u8>, Base58DecodeError> {
 
     Ok(decoded)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
