@@ -1,7 +1,7 @@
 extern crate num;
 extern crate phf;
 
-use self::num::{BigUint, FromPrimitive, ToPrimitive};
+use self::num::{Integer, BigUint, FromPrimitive, ToPrimitive};
 
 pub use crypto::double_sha256_checksum;
 pub use errors::Base58DecodeError;
@@ -20,9 +20,9 @@ pub fn b58encode(bytestr: &[u8]) -> String {
     let zero = BigUint::from_u8(0u8).unwrap();
 
     while number > zero {
-        let remainder = &number % &alphabet_length;
+        let (quotient, remainder) = number.div_rem(&alphabet_length);
+        number = quotient;
         encoded.push(ALPHABET[remainder.to_usize().unwrap()]);
-        number = &number / &alphabet_length;
     }
 
     for byte in bytestr.iter() {
