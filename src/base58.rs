@@ -48,7 +48,7 @@ pub fn b58encode_check(bytestr: &[u8]) -> String {
 
 
 pub fn b58decode(string: &String) -> Result<Vec<u8>, Base58DecodeError> {
-    let mut number = BigUint::new(Vec::new());
+    let mut number = BigUint::from_u8(0u8).unwrap();
     let alphabet_length = BigUint::from_u8(58u8).unwrap();
 
     for c in string.chars() {
